@@ -1,0 +1,22 @@
+div h1 {
+    margin-left: 2%;
+    margin-top: 3%;
+}
+hr {
+    margin-left: 1%;
+    background-color: rgb(4, 4, 52);
+    width: 65%;
+}
+#cityName {
+    margin-left: 2%;
+    width: 65%;
+}
+#searchButton {
+    background-color: rgb(33, 98, 182);
+    color: aliceblue;
+    justify-content: center;
+    margin-left: 2%;
+    margin-top: 2%;
+    width: 65%;
+}
+
