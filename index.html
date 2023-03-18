@@ -12,19 +12,21 @@
 <header class="d-flex justify-content-center bg-primary bg-gradient">
     <h1 class="text-white">Weather Dashboard</h1>
 </header>
-<div class="row">
+<div class="row d-flex">
     <div class="col-4">
-        <h1 class="text-black">Search for a City: </h1>
+        <h1 class="text-black">Search for a City:</h1>
         <input class="col-4" id="cityName" type="text" placeholder="City Name">
         <button class="d-flex" type="button" id="searchButton"> Search </button>
-        <hr class="hr hr-blurry">
-        </hr>
+        <hr class="hr hr-blurry"> </hr>
+        <div id="citiesList" type="button"> </div>
+    </div>
+    <div id="currentForecast" class="flex-fill col-8">
+        
     </div>
 </div>
 
-<div id="citiesList" type="button"> </div>
 
-<div class="row col-8"></div>
+
 
 <body>
 </body>

@@ -20,3 +20,20 @@ hr {
     width: 65%;
 }
 
+.row {
+    margin-left: 2%;
+}
+
+.text-black {
+    font-size: 240%;
+}
+
+#currentForecast {
+    background-color: aliceblue;
+    margin-top: 3%;
+    margin-right: 10%;
+    width: 50%;
+    height: 200px;
+    outline: 2px solid rgb(0, 0, 0);
+}
+
