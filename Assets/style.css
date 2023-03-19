@@ -20,19 +20,34 @@ hr {
     width: 65%;
 }
 
+#placeholder {
+    margin-left: 40%;
+    font-size: large;
+}
+
 .row {
     margin-left: 2%;
 }
 
 .text-black {
-    font-size: 240%;
+    font-size: 150%;
+}
+
+.card {
+    margin-top: 50px;
+    margin-left: 3%;
+    background-color: rgb(180, 205, 252);
+}
+
+.card-body {
+    padding: 2px;
 }
 
 #currentForecast {
     background-color: aliceblue;
     margin-top: 3%;
     margin-right: 10%;
-    width: 50%;
+    width: 95%;
     height: 200px;
     outline: 2px solid rgb(0, 0, 0);
 }
