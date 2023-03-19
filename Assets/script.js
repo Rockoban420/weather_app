@@ -26,21 +26,29 @@ var appendCities = function () {
 };
 
 function getCurrentW(requestUrl) {
+  var current = true;
   fetch(requestUrl)
     .then(function (response) {
       if (response.status === 404) {
-        return false;
+        current = false;
+        let keys = Object.keys(citiesList)
+        delete citiesList[keys[keys.length-1]];
+        console.log (citiesList);
+        localStorage.setItem("cities", JSON.stringify(citiesList));
       }
       else {
       return response.json();
       }
     })
     .then(function (data) {
+      if (current===false) {
+      window.alert ('Error 404 city not found');
+      cityButton.removeChild(lastElementChild);
+      return;
+      }
       placeholder.text  ('');
       var cityName = data.name;
-      let currentTempK = data.main.temp;
-      let currentTempN = (currentTempK-273.15) * 1.8 + 32;
-      let currentTempR = Math.floor(currentTempN);
+      let currentTempR = data.main.temp;
       let currentWind = data.wind.speed;
       let humidityV = data.main.humidity;
       cityNameEl.innerHTML = '';
@@ -61,13 +69,13 @@ function getCurrentW(requestUrl) {
       dayWeather.append (tempEl);
       dayWeather.append (windEl);
       dayWeather.append (humidityEl);
-      var requestUrl3 = `http://api.openweathermap.org/data/2.5/forecast?q=${cityName}&id=524901&appid=d6c6f2f334d8420a6173b353ed5724d3`;
+      var requestUrl3 = `http://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=imperial&id=524901&appid=d6c6f2f334d8420a6173b353ed5724d3`;
       fetch(requestUrl3)
       .then(function (response) {
         return response.json();
       })
       .then(function (data) {
-        let currentTempK;
+        let currentTempR;
         let currentWind;
         let humidityV;
         list = 3;
@@ -75,10 +83,8 @@ function getCurrentW(requestUrl) {
           let currentCardEl = $(`#${i}`);
           let iconEl2 = document.createElement ('img');
           currentWind = data.list[list].wind.speed;
-          currentTempK = data.list[list].main.temp;
+          currentTempR = data.list[list].main.temp;
           humidityV = data.list[list].main.humidity;
-          let currentTempN = (currentTempK-273.15) * 1.8 + 32;
-          let currentTempR = Math.floor(currentTempN);
           iconEl2.src = `https://openweathermap.org/img/w/${data.list[list].weather[0].icon}.png`;
           let currentDate = data.list[list].dt_txt;
           let myDateArr = currentDate.split(' ');
@@ -95,7 +101,7 @@ function getCurrentW(requestUrl) {
 
 appendCities();
 if (Object.keys(citiesList)[0]){
-let requestUrl1 = `http://api.openweathermap.org/data/2.5/weather?q=${Object.keys(citiesList)[0]}&id=524901&appid=d6c6f2f334d8420a6173b353ed5724d3`;
+let requestUrl1 = `http://api.openweathermap.org/data/2.5/weather?q=${Object.keys(citiesList)[0]}&units=imperial&id=524901&appid=d6c6f2f334d8420a6173b353ed5724d3`;
 getCurrentW (requestUrl1);
 } else {
   placeholder.text ('Current Day Forecast');
@@ -105,7 +111,7 @@ buttonEl.on('click', function () {
   let currentCityName = inputEl.val();
   citiesList[currentCityName] = 1;
   localStorage.setItem("cities", JSON.stringify(citiesList));
-  let requestUrl2 = `http://api.openweathermap.org/data/2.5/weather?q=${currentCityName}&id=524901&appid=d6c6f2f334d8420a6173b353ed5724d3`;
+  let requestUrl2 = `http://api.openweathermap.org/data/2.5/weather?q=${currentCityName}&units=imperial&id=524901&appid=d6c6f2f334d8420a6173b353ed5724d3`;
   getCurrentW (requestUrl2);
   var cityButton = document.createElement('button');
   cityButton.innerHTML = currentCityName;
@@ -119,6 +125,6 @@ buttonEl.on('click', function () {
 
 citiesListEl.on ('click' , function(event){
   let currentCityName = event.target.innerHTML;
-  let requestUrl2 = `http://api.openweathermap.org/data/2.5/weather?q=${currentCityName}&id=524901&appid=d6c6f2f334d8420a6173b353ed5724d3`;
+  let requestUrl2 = `http://api.openweathermap.org/data/2.5/weather?q=${currentCityName}&units=imperial&id=524901&appid=d6c6f2f334d8420a6173b353ed5724d3`;
   getCurrentW (requestUrl2);
 });
