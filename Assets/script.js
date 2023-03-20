@@ -1,4 +1,3 @@
-
 var responseText = document.getElementById('response-text');
 var buttonEl = $('#searchButton');
 var inputEl = $('#cityName');
@@ -12,7 +11,7 @@ var tempEl = document.createElement ('p');
 var windEl = document.createElement ('p');
 var humidityEl = document.createElement ('p');
 var cardEl = $('.card');
-var list = 3;
+var counter = 0;
 
 var appendCities = function () {
   for (const key in citiesList) {
@@ -32,7 +31,10 @@ function getCurrentW(requestUrl) {
       if (response.status === 404) {
         current = false;
         let keys = Object.keys(citiesList)
+        if (counter<1) {
         delete citiesList[keys[keys.length-1]];
+        counter++;  
+        }
         console.log (citiesList);
         localStorage.setItem("cities", JSON.stringify(citiesList));
       }
@@ -78,7 +80,15 @@ function getCurrentW(requestUrl) {
         let currentTempR;
         let currentWind;
         let humidityV;
-        list = 3;
+        for (let i = 0 ; i < data.list.length; i++) {
+          var currentITime = data.list[i].dt_txt;
+          let myDateArr2 = currentITime.split(' ');
+          if (myDateArr2[1] == '12:00:00') {
+            list = i;
+            i = data.list.length;
+            console.log (myDateArr2);
+          }
+        }
         for (let i = 1; i <= cardEl.length; i++){
           let currentCardEl = $(`#${i}`);
           let iconEl2 = document.createElement ('img');
