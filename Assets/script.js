@@ -71,7 +71,7 @@ function getCurrentW(requestUrl) {
       dayWeather.append (tempEl);
       dayWeather.append (windEl);
       dayWeather.append (humidityEl);
-      var requestUrl3 = `http://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=imperial&id=524901&appid=d6c6f2f334d8420a6173b353ed5724d3`;
+      var requestUrl3 = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=imperial&id=524901&appid=d6c6f2f334d8420a6173b353ed5724d3`;
       fetch(requestUrl3)
       .then(function (response) {
         return response.json();
@@ -111,7 +111,7 @@ function getCurrentW(requestUrl) {
 
 appendCities();
 if (Object.keys(citiesList)[0]){
-let requestUrl1 = `http://api.openweathermap.org/data/2.5/weather?q=${Object.keys(citiesList)[0]}&units=imperial&id=524901&appid=d6c6f2f334d8420a6173b353ed5724d3`;
+let requestUrl1 = `https://api.openweathermap.org/data/2.5/weather?q=${Object.keys(citiesList)[0]}&units=imperial&id=524901&appid=d6c6f2f334d8420a6173b353ed5724d3`;
 getCurrentW (requestUrl1);
 } else {
   placeholder.text ('Current Day Forecast');
@@ -121,7 +121,7 @@ buttonEl.on('click', function () {
   let currentCityName = inputEl.val();
   citiesList[currentCityName] = 1;
   localStorage.setItem("cities", JSON.stringify(citiesList));
-  let requestUrl2 = `http://api.openweathermap.org/data/2.5/weather?q=${currentCityName}&units=imperial&id=524901&appid=d6c6f2f334d8420a6173b353ed5724d3`;
+  let requestUrl2 = `https://api.openweathermap.org/data/2.5/weather?q=${currentCityName}&units=imperial&id=524901&appid=d6c6f2f334d8420a6173b353ed5724d3`;
   getCurrentW (requestUrl2);
   var cityButton = document.createElement('button');
   cityButton.innerHTML = currentCityName;
@@ -135,6 +135,6 @@ buttonEl.on('click', function () {
 
 citiesListEl.on ('click' , function(event){
   let currentCityName = event.target.innerHTML;
-  let requestUrl2 = `http://api.openweathermap.org/data/2.5/weather?q=${currentCityName}&units=imperial&id=524901&appid=d6c6f2f334d8420a6173b353ed5724d3`;
+  let requestUrl2 = `https://api.openweathermap.org/data/2.5/weather?q=${currentCityName}&units=imperial&id=524901&appid=d6c6f2f334d8420a6173b353ed5724d3`;
   getCurrentW (requestUrl2);
 });
